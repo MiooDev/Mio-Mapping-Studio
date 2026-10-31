@@ -1,0 +1,677 @@
+{
+ "blender": "5.2.3 LTS",
+ "results": [
+  {
+   "test": "test_static_imported_collision",
+   "check": "nom normalisé « Garage » -> mio_garage",
+   "ok": true,
+   "detail": "mio_garage"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "pas de double préfixe",
+   "ok": true,
+   "detail": "mio_garage"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "préparer : pas d'erreur",
+   "ok": true,
+   "detail": "Drawable « mio_garage » créé.\n2 modèle(s) regroupé(s) sous « mio_garage » (positions mondiales conservées, aucun mesh fusionné).\n1 objet(s) à l'origine du monde exprimé(s) dans le repère du Drawable (sinon Sollumz les exporterait décalés) ; 0 mesh partagé(s) copié(s).\nOrigine de « mio_garage » : (97.500, 200.000, 29.900) — c'est la position de l'entité dans le YMAP.\nDrawable d'origine « tst_building » vidé : rangé dans « MIO_ARCHIVE_mio_garage » (non exporté).\nDrawable d'origine « tst_ground » vidé : rangé dans « MIO_ARCHIVE_mio_garage » (non exporté).\nRacine collision « tst_col » renommée « m"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "Drawable mio_garage créé",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "2 modèles regroupés, aucun mesh fusionné",
+   "ok": true,
+   "detail": "['tst_building.model', 'tst_ground.model']"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "LOD Medium du bâtiment conservé",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "positions mondiales des sommets inchangées (tous LOD)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "UV inchangées",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "Color Attributes inchangés",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "matériaux / slots inchangés",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "origine = centre XY / point le plus bas du mapping (après découpe)",
+   "ok": true,
+   "detail": "((97.5, 200.0, 29.899999618530273), array([ 80.        , 180.        ,  29.89999962]), array([115., 220.,  36.]))"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "sol (matrice identité) ré-exprimé dans le repère du Drawable",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "collision importée renommée mio_garage_col",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "racine collision = Bound Composite",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "collision non déplacée",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "slot inutilisé ignoré (tst_unused)",
+   "ok": true,
+   "detail": "{'tst_brick_n', 'tst_sign', 'tst_grass', 'tst_sand_n', 'tst_dirt', 'tst_brick', 'tst_decal', 'tst_concrete', 'tst_rock_n', 'tst_missing', 'tst_brick_s', 'tst_grass_n', 'tst_sand', 'tst_rock'}"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "placeholder sans référence ignoré",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "références nécessaires = textures réellement utilisées (8 du terrain multicouche incluses)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "tst_brick trouvée via la provenance (tst_building_txd)",
+   "ok": true,
+   "detail": "Dictionnaire de l'archetype d'origine « tst_building » (tst_building_txd)"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "texture intégrée au modèle importé utilisée (SCENE)",
+   "ok": true,
+   "detail": "Texture intégrée au modèle importé (provenance exacte)"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "homonyme tst_grass résolu par provenance (tst_ground_txd, pas tst_other_txd)",
+   "ok": true,
+   "detail": "Dictionnaire de l'archetype d'origine « tst_ground » (tst_ground_txd)"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "copies identiques tst_rock : pas d'ambiguïté",
+   "ok": true,
+   "detail": "2 copies identiques (mêmes pixels) : tst_props_a_txd retenu"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "dictionnaire parent gtxd (tst_shared_txd)",
+   "ok": true,
+   "detail": "Dictionnaire parent (gtxd) de « tst_ground » : tst_shared_txd"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "versions base/DLC : la version DLC prioritaire est retenue",
+   "ok": true,
+   "detail": "update/x64/dlcpacks/tstdlc/dlc.rpf/x64/levels/tst/tst_sand_txd.ytd"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "vraie ambiguïté tst_dirt signalée (pas de choix arbitraire)",
+   "ok": true,
+   "detail": "AMBIGUOUS"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "texture absente signalée manquante",
+   "ok": true,
+   "detail": "MISSING"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "état de l'étape textures = Erreur (manquante)",
+   "ok": true,
+   "detail": "ERROR"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "bilan affiché",
+   "ok": true,
+   "detail": "Références nécessaires : 14 | Trouvées : 12 (dont 0 en mode secours DDS local) | Ambiguës : 1 | Manquantes : 1 | Dans mio_garage.ytd : 12 texture(s), 2.3 Kio"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "YTD binaire construit",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "YTD relu par CodeWalker.Core : textures trouvées seulement, sans doublon",
+   "ok": true,
+   "detail": "['tst_brick', 'tst_brick_n', 'tst_brick_s', 'tst_concrete', 'tst_decal', 'tst_grass', 'tst_grass_n', 'tst_rock', 'tst_rock_n', 'tst_sand', 'tst_sand_n', 'tst_sign']"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "DDS extraits identiques aux originaux (formats, mips, alpha)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "image Blender rechargée depuis le DDS d'origine, nom de texture conservé",
+   "ok": true,
+   "detail": "/tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/cache/textures/a71d797fe448/tst_brick.dds"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "UV/couleurs toujours inchangés après textures",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "choix manuel mémorisé et appliqué (tst_misc_b_txd)",
+   "ok": true,
+   "detail": "Choix manuel"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "collision intégrée (Bound Composite enfant direct du Drawable)",
+   "ok": true,
+   "detail": "« mio_garage_col » intégré au Drawable « mio_garage » (Bound Composite enfant direct : collision embedded du YDR). Les meshes visuels et de collision restent séparés.\nArchetype Base « mio_garage » mis à jour (pas de doublon).\nPhysics Dictionary = mio_garage (collision intégrée au YDR ; revérifié à l'export).\nBBMin (-17.5, -20.0, 0.0), BBMax (17.5, 20.0, 6.1), rayon 26.75 m (calcul Blender, repère du Drawable)."
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "collision toujours à sa place après intégration",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "meshes visuels et collision restent séparés (pas de Ctrl+J)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "archetype Base unique mio_garage",
+   "ok": true,
+   "detail": "['mio_garage']"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "Asset Name / Texture Dictionary / Physics Dictionary = mio_garage",
+   "ok": true,
+   "detail": "('mio_garage', 'mio_garage', 'mio_garage')"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "export complet refusé : texture manquante",
+   "ok": true,
+   "detail": "Erreur : Textures manquantes ou ambiguës : l'export serait incomplet. Corrige l'étape 2 ou coche « Exporter même si incomplet »."
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "export incomplet : fichiers écrits et déclarés INCOMPLET",
+   "ok": true,
+   "detail": "Attention : Textures référencées par le YDR absentes du YTD : tst_missing.\nAttention : Export INCOMPLET : textures manquantes/ambiguës (voir étape 2).\nExport INCOMPLET : mio_garage.ydr, mio_garage.ytd, mio_garage.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "DDS local utilisé en mode secours et signalé comme tel",
+   "ok": true,
+   "detail": "Absente de l'index du jeu : DDS local utilisé (mode de secours, à vérifier)"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "export COMPLET",
+   "ok": true,
+   "detail": "Export COMPLET : mio_garage.ydr, mio_garage.ytd, mio_garage.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export/.mio_staging_mio_garage_20261031_194815\nCollision intégrée relue et alignée avec le visuel (min (-17.5, -20.0, 0.0) max (17.5, 20.0, 6.1)).\nmio_garage.ytyp relu : mio_garage (CBaseArchetype)\nAncien export sauvegardé dans /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "3 livrables (+ rapport) : ydr, ytd, ytyp",
+   "ok": true,
+   "detail": "['mio_garage.ydr', 'mio_garage.ytd', 'mio_garage.ytyp', 'mio_garage_rapport.txt']"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "aucun XML dans l'export final",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "mio_garage.ydr est une ressource binaire RSC7",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "mio_garage.ytd est une ressource binaire RSC7",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "mio_garage.ytyp est une ressource binaire RSC7",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "YDR relu : collision intégrée de type Composite",
+   "ok": true,
+   "detail": "Composite"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "alignement collision/visuel : AABB relue = AABB Blender (repère du Drawable, ±1 cm)",
+   "ok": true,
+   "detail": "(array([-17.5, -20. ,   0. ]), array([-17.5, -20. ,   0. ]), array([17.5      , 20.       ,  6.1000004]), array([17.5       , 20.        ,  6.10000038]))"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "boîte BVH cohérente avec ses sommets",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "bounds visuels du YDR = géométrie Blender",
+   "ok": true,
+   "detail": "([-17.5, -20, 0], array([-17.5, -20. ,   0. ]))"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "textures référencées par le YDR toutes dans le YTD",
+   "ok": true,
+   "detail": "['tst_brick', 'tst_brick_n', 'tst_brick_s', 'tst_concrete', 'tst_decal', 'tst_dirt', 'tst_grass', 'tst_grass_n', 'tst_missing', 'tst_rock', 'tst_rock_n', 'tst_sand', 'tst_sand_n', 'tst_sign']"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "texture intégrée d'origine déplacée dans le YTD (pas de doublon dans le YDR)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "YTYP relu : 1 archetype Base, aucun MLO",
+   "ok": true,
+   "detail": "['CBaseArchetypeDef']"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "YTYP : asset/txd/physics = mio_garage, ASSET_TYPE_DRAWABLE, flag Static",
+   "ok": true,
+   "detail": "{'kind': 'CBaseArchetypeDef', 'name': 'mio_garage', 'asset_name': 'mio_garage', 'asset_type': 'ASSET_TYPE_DRAWABLE', 'texture_dictionary': 'mio_garage', 'physics_dictionary': 'mio_garage', 'drawable_dictionary': '', 'flags': 32, 'lod_dist': 300, 'hd_texture_dist': 100, 'bb_min': [-17.5, -20, 0], 'bb_max': [17.5, 20, 6.1000004], 'bs_center': [0, 0, 3.0500002], 'bs_radius': 26.749813, 'mlo': None}"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "YTYP : BBMin/BBMax = géométrie exportée (visuel + collision)",
+   "ok": true,
+   "detail": "([-17.5, -20, 0], array([-17.5, -20. ,   0. ]))"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "relance complète : export OK",
+   "ok": true,
+   "detail": "Export COMPLET : mio_garage.ydr, mio_garage.ytd, mio_garage.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export/.mio_staging_"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "relance : aucun objet ni matériau dupliqué",
+   "ok": true,
+   "detail": "(8, 8, 7, 7)"
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "relance : un seul YTYP / archetype",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "relance : un seul dictionnaire de textures Sollumz, sans doublon",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "relance : ancien export sauvegardé avant remplacement",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "relance : pas de dossier temporaire laissé",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_static_imported_collision",
+   "check": "installation GTA jamais modifiée",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "Bound Composite mio_garage_gen_col créé",
+   "ok": true,
+   "detail": "Attention : Copie fidèle du visuel, non simplifiée : vérifie-la et simplifie-la manuellement si elle est trop détaillée (escaliers, détails fins, faces invisibles).\nCollision « mio_garage_gen_col » créée : 1 BVH, 2 Poly Mesh, 632 triangles, depuis le LOD High seulement (pas de doublon entre LOD).\nUsage « GENERAL » : flags « General (Default) », matériau CONCRETE (« mio_col_concrete », modifiable dans l'onglet matériau de Sollumz).\n8 face(s) de décals/feuillages/eau/câbles exclues de la collision."
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "structure Composite > BVH > Poly Mesh",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "copie : seuls des matériaux de collision",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "matériau de collision valide CONCRETE (index Sollumz)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "flags preset « General (Default) » appliqués",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "visuel intact (matériaux d'origine conservés)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "données mesh indépendantes",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "un seul LOD copié (High) et faces de décal exclues",
+   "ok": true,
+   "detail": "(632, 192, 8, 448)"
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "collision générée alignée sur le visuel (même AABB monde)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "avertissement copie détaillée / simplification manuelle",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "pas de remplacement sans action explicite",
+   "ok": true,
+   "detail": "Erreur : Une collision existe déjà (« mio_garage_gen_col »). Elle n'est pas remplacée sans action explicite : coche « Remplacer la collision existante » pour la régénérer."
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "régénération explicite sans doublon",
+   "ok": true,
+   "detail": "(9, 9)"
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "export (YMAP + ressource FiveM)",
+   "ok": true,
+   "detail": "(['mio_garage_gen.ydr', 'mio_garage_gen.ymap', 'mio_garage_gen.ytd', 'mio_garage_gen.ytyp'], 'Attention : Textures référencées par le YDR absentes du YTD : tst_dirt, tst_missing.\\nAttention : Export INCOMPLET : textures manquantes/ambiguës (voir étape 2).\\nExport INCOMPLET : mio_garage_gen.ydr, mio_garage_gen.ytd, mio_garage_gen.ytyp, mio_garage_gen.ymap -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export_gen/mio_garage_gen/stream\\nDossier tem')"
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "fxmanifest.lua déclare le YTYP",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "YMAP : entité mio_garage_gen à l'origine du Drawable, sans MLO",
+   "ok": true,
+   "detail": "{'archetype': 'mio_garage_gen', 'position': [97.5, 200, 29.9], 'rotation': [0, 0, 0, 1], 'flags': 32, 'lod_dist': 300, 'mlo': False}"
+  },
+  {
+   "test": "test_collision_from_visual",
+   "check": "YDR : collision générée intégrée et cohérente",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_bvh_split",
+   "check": "mesh Blender avec matériau Sollumz converti en Drawable Model",
+   "ok": true,
+   "detail": "Attention : Aucune collision désignée : choisis l'objet racine collision (collision importée et découpée) ou utilise « Créer les collisions depuis le mapping ».\nDrawable « mio_bigplane » créé.\n« big_plane » converti en Drawable Model (LOD High = mesh actuel).\n1 modèle(s) regroupé(s) sous « mio_bigpl"
+  },
+  {
+   "test": "test_bvh_split",
+   "check": "53361 sommets fractionnés en BVH ≤ 32767",
+   "ok": true,
+   "detail": "[26796, 26796]"
+  },
+  {
+   "test": "test_bvh_split",
+   "check": "export du grand mapping",
+   "ok": true,
+   "detail": "Attention : Sollumz : Mesh 'big' is missing UV maps used by Sollumz shaders: UVMap 0. Please add them to avoid rendering issues in-game.\nAttention : Sollumz : Mesh 'big' is missing color attributes used by Sollumz shaders: Color 1. Please add them to avoid rendering issues in-game.\nExport COMPLET : "
+  },
+  {
+   "test": "test_bvh_split",
+   "check": "YDR : autant d'enfants de collision que de BVH, tous cohérents",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "MLO : collision séparée et alignée sur le Drawable",
+   "ok": true,
+   "detail": "Origine de « mio_garage_mlo_col » alignée sur celle de « mio_garage_mlo » : repère local du MLO = position du Drawable."
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "configuration MLO sans erreur",
+   "ok": true,
+   "detail": "Archetype Base « mio_garage_mlo » mis à jour (pas de doublon).\nMode MLO : Physics Dictionary vide (la collision est le YBN de l'archetype MLO).\nBBMin (-17.5, -20.0, 0.0), BBMax (17.5, 20.0, 6.1), rayon 26.75 m (calcul Blender, repère du Drawable).\nArchetype MLO « mio_garage_mlo_col » créé.\nRoom « li"
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "room nommée exactement « limbo »",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "limbo : BBMin X/Y diminué de 0,50 et BBMax X/Y augmenté de 0,50 (repère local du MLO)",
+   "ok": true,
+   "detail": "((-18.0, -20.5, 0.0), array([-17.5, -20. ,   0. ]), (18.0, 20.5, 6.100000381469727), array([17.5       , 20.        ,  6.10000038]))"
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "limbo : hauteur conservée (pas de marge Z par défaut)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "entité mio_garage_mlo attachée à limbo",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "aucun portal créé",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "archetype Base sans Physics Dictionary en mode MLO",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "MLO : 5 fichiers réellement nécessaires",
+   "ok": true,
+   "detail": "(['mio_garage_mlo.ydr', 'mio_garage_mlo.ymap', 'mio_garage_mlo.ytd', 'mio_garage_mlo.ytyp', 'mio_garage_mlo_col.ybn'], 'Attention : Textures référencées par le YDR absentes du YTD : tst_dirt, tst_missing.\\nAttention : Export INCOMPLET : textures manquantes/ambiguës (voir étape 2).\\nExport INCOMPLET : mio_garage_mlo.ydr, mio_garage_mlo.ytd, mio_garage_mlo_col.ybn, mio_garage_mlo.ytyp, mio_garage_mlo.ymap -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export_mlo\\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b"
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "MLO : YDR sans collision intégrée (pas de doublon)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "MLO : YBN aligné (repère du MLO)",
+   "ok": true,
+   "detail": "(array([-17.5, -20. ,   0. ]), array([-17.5, -20. ,   0. ]))"
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "YTYP : archetype MLO mio_garage_mlo_col avec room limbo et entité attachée",
+   "ok": true,
+   "detail": "{'kind': 'CMloArchetypeDef', 'name': 'mio_garage_mlo_col', 'asset_name': 'mio_garage_mlo_col', 'asset_type': 'ASSET_TYPE_ASSETLESS', 'texture_dictionary': '', 'physics_dictionary': '', 'drawable_dictionary': '', 'flags': 0, 'lod_dist': 200, 'hd_texture_dist': 100, 'bb_min': [0, 0, 0], 'bb_max': [0, 0, 0], 'bs_center': [0, 0, 0], 'bs_radius': 0, 'mlo': {'entities': [{'archetype': 'mio_garage_mlo', 'position': [0, 0, 0], 'flags': 32}], 'rooms': [{'name': 'limbo', 'bb_min': [-18, -20.5, 0], 'bb_max': [18, 20.5, 6.1000004], 'attached': [0], 'portal_count': 0, 'flags': 0}], 'portals': 0}}"
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "YTYP : MLO ne référence que des fichiers exportés",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "YMAP : instance MLO mio_garage_mlo_col à l'origine de la collision",
+   "ok": true,
+   "detail": "{'archetype': 'mio_garage_mlo_col', 'position': [97.5, 200, 29.9], 'rotation': [0, 0, 0, 1], 'flags': 0, 'lod_dist': 300, 'mlo': True}"
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "montage invalide (MLO + statique) refusé, rien d'écrit",
+   "ok": true,
+   "detail": "Erreur : [ytyp] Archetype MLO « mio_garage_mlo_col » présent en mode statique : il référencerait mio_garage_mlo_col.ybn qui ne sera pas exporté. Retire-le.\nErreur : [mlo] Un archetype MLO est présent dans le YTYP : incohérent en mode statique."
+  },
+  {
+   "test": "test_mlo_mode",
+   "check": "après retrait du MLO : export statique accepté",
+   "ok": true,
+   "detail": "Attention : Textures référencées par le YDR absentes du YTD : tst_dirt, tst_missing.\nAttention : Export INCOMPLET : textures manquantes/ambiguës (voir étape 2).\nExport INCOMPLET : mio_garage_mlo.ydr, mio_garage_mlo.ytd, mio_garage_mlo.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9"
+  },
+  {
+   "test": "test_invalid_inputs",
+   "check": "mesh sans matériau Sollumz refusé",
+   "ok": true,
+   "detail": "Erreur : « Cube » n'a aucun matériau : impossible d'en faire un modèle GTA.\nErreur : Aucun élément visuel (Drawable Model) trouvé dans la sélection."
+  },
+  {
+   "test": "test_invalid_inputs",
+   "check": "nom vide refusé",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_invalid_inputs",
+   "check": "aucune sélection : refus (jamais tous les objets de la scène)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_async_driver_and_cancel",
+   "check": "pilote asynchrone terminé sans erreur",
+   "ok": true,
+   "detail": "None"
+  },
+  {
+   "test": "test_async_driver_and_cancel",
+   "check": "progression rapportée pendant les étapes",
+   "ok": true,
+   "detail": "{'Installation', 'Construction', 'Lecture', 'Structure'}"
+  },
+  {
+   "test": "test_async_driver_and_cancel",
+   "check": "résultat identique au mode bloquant (14 références)",
+   "ok": true,
+   "detail": "['Références nécessaires : 14', 'Trouvées : 12 (dont 0 en mode secours DDS local)']"
+  },
+  {
+   "test": "test_async_driver_and_cancel",
+   "check": "annulation : l'outil s'arrête (code 3, « annulée »)",
+   "ok": true,
+   "detail": "(3, {'type': 'result', 'ok': False, 'error': \"Operation annulee par l'utilisateur.\"})"
+  },
+  {
+   "test": "test_async_driver_and_cancel",
+   "check": "annulation : index existant intact (pas d'index partiel)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_async_driver_and_cancel",
+   "check": "annulation : processus séparé arrêté par l'addon",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_async_driver_and_cancel",
+   "check": "annulation depuis l'interface (pilote)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_ui_smoke",
+   "check": "panneaux dessinés sans erreur (2 modes, tâche en cours ou non)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "test": "test_ui_smoke",
+   "check": "icônes des énumérations valides",
+   "ok": true,
+   "detail": "[]"
+  }
+ ]
+}

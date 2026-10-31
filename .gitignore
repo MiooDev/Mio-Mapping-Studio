@@ -1,0 +1,9 @@
+# Build outputs
+companion/third_party/
+companion/MioGtaTool/bin/
+companion/MioGtaTool/obj/
+companion/publish/
+__pycache__/
+*.pyc
+# Test outputs
+tests/_out/

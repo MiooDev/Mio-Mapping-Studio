@@ -1,0 +1,17 @@
+schema_version = "1.0.0"
+
+id = "mio_mapping_studio"
+version = "1.0.0"
+name = "Mio Mapping Studio"
+tagline = "Mapping GTA V/FiveM : collisions, textures, YTYP et export"
+maintainer = "MiooDev"
+type = "add-on"
+website = "https://github.com/MiooDev/mio-mapping-studio"
+tags = ["Import-Export"]
+
+blender_version_min = "4.2.0"
+
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+files = "Lire GTA V, écrire le cache, les textures et les exports"

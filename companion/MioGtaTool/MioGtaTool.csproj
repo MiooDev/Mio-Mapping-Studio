@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    MioGtaTool : outil compagnon de l'addon Blender "Mio Mapping Studio".
+    Il s'appuie sur CodeWalker.Core (dexyfex/CodeWalker), qui n'est PAS redistribue
+    dans ce depot : le script build.ps1 / build.sh le clone localement au commit
+    indique dans ../CODEWALKER_COMMIT.txt.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>MioGtaTool</AssemblyName>
+    <RootNamespace>MioGtaTool</RootNamespace>
+    <Version>1.0.0</Version>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <TieredPGO>true</TieredPGO>
+    <!-- CodeWalker.Core genere beaucoup d'avertissements, on ne les traite pas comme des erreurs -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);CS0168;CS0219;CS0414;CS0649;CS0169;CS8632</NoWarn>
+    <CodeWalkerDir Condition="'$(CodeWalkerDir)' == ''">$(MSBuildThisFileDirectory)../third_party/CodeWalker</CodeWalkerDir>
+    <CodeWalkerCommit>$([System.IO.File]::ReadAllText($([MSBuild]::NormalizePath('$(MSBuildThisFileDirectory)', '..', 'CODEWALKER_COMMIT.txt'))).Trim())</CodeWalkerCommit>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="CodeWalkerCommit" Value="$(CodeWalkerCommit)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(CodeWalkerDir)/CodeWalker.Core/CodeWalker.Core.csproj" />
+  </ItemGroup>
+
+</Project>
