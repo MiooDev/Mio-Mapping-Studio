@@ -29,9 +29,10 @@ Commande : `tests/run_tests.sh` (voir l'en-tête du script). Rapports bruts :
 | Fractionnement BVH (53 361 sommets) | 4 | ✅ 4/4 | ✅ 4/4 |
 | Mode MLO limbo (5 fichiers) + refus du montage MLO/statique invalide | 16 | ✅ 16/16 | ✅ 16/16 |
 | Entrées invalides | 3 | ✅ 3/3 | ✅ 3/3 |
+| Collision `mio_xxxx_col` existante non désignée + origine (0,0,0) loin du mapping (cas réel signalé) | 5 | ✅ 5/5 | non relancé |
 | Pilote asynchrone (tâche de fond), progression, annulation | 7 | ✅ 7/7 | ✅ 7/7 |
 | Interface : chaque panneau exécuté avec un layout simulé (icônes, propriétés, opérateurs) | 2 | ✅ 2/2 | ✅ 2/2 |
-| **Total** | **112** | **112/112** | **112/112** |
+| **Total** | **117** | **117/117** | **112/112** (avant l'ajout du test ci-dessus) |
 
 ### Ce que couvrent ces vérifications
 - **Collisions importées** : YBN importé par Sollumz (BVH à matrice identité), désigné comme racine, renommé

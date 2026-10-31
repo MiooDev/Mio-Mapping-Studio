@@ -95,7 +95,7 @@
    "test": "test_static_imported_collision",
    "check": "slot inutilisé ignoré (tst_unused)",
    "ok": true,
-   "detail": "{'tst_brick_n', 'tst_sign', 'tst_grass', 'tst_sand_n', 'tst_dirt', 'tst_brick', 'tst_decal', 'tst_concrete', 'tst_rock_n', 'tst_missing', 'tst_brick_s', 'tst_grass_n', 'tst_sand', 'tst_rock'}"
+   "detail": "{'tst_brick', 'tst_brick_s', 'tst_rock', 'tst_decal', 'tst_grass_n', 'tst_sand', 'tst_sign', 'tst_missing', 'tst_sand_n', 'tst_dirt', 'tst_grass', 'tst_brick_n', 'tst_rock_n', 'tst_concrete'}"
   },
   {
    "test": "test_static_imported_collision",
@@ -257,7 +257,7 @@
    "test": "test_static_imported_collision",
    "check": "export COMPLET",
    "ok": true,
-   "detail": "Export COMPLET : mio_garage.ydr, mio_garage.ytd, mio_garage.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export/.mio_staging_mio_garage_20261031_194815\nCollision intégrée relue et alignée avec le visuel (min (-17.5, -20.0, 0.0) max (17.5, 20.0, 6.1)).\nmio_garage.ytyp relu : mio_garage (CBaseArchetype)\nAncien export sauvegardé dans /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/"
+   "detail": "Export COMPLET : mio_garage.ydr, mio_garage.ytd, mio_garage.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export/.mio_staging_mio_garage_20261031_201629\nCollision intégrée relue et alignée avec le visuel (min (-17.5, -20.0, 0.0) max (17.5, 20.0, 6.1)).\nmio_garage.ytyp relu : mio_garage (CBaseArchetype)\nAncien export sauvegardé dans /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/"
   },
   {
    "test": "test_static_imported_collision",
@@ -620,6 +620,36 @@
    "detail": ""
   },
   {
+   "test": "test_named_collision_and_far_origin",
+   "check": "diagnostic : collision existante non désignée signalée (et non « aucune collision »)",
+   "ok": true,
+   "detail": "[\"L'origine de « mio_airport » est à 190 m de sa géométrie : la distance d'affichage (LOD) est mesurée depuis l'origine, le mapping risque de ne pas apparaître en jeu. Relance « Préparer le mapping » avec l'origine « Centre du mapping (bas) ».\", \"La collision « mio_airport_col » existe mais n'est pas désignée : clique « Utiliser mio_airport_col » (étape 1) ou mets-la dans « Objet racine collision ».\"]"
+  },
+  {
+   "test": "test_named_collision_and_far_origin",
+   "check": "diagnostic : origine éloignée de la géométrie signalée",
+   "ok": true,
+   "detail": "[\"L'origine de « mio_airport » est à 190 m de sa géométrie : la distance d'affichage (LOD) est mesurée depuis l'origine, le mapping risque de ne pas apparaître en jeu. Relance « Préparer le mapping » avec l'origine « Centre du mapping (bas) ».\", \"La collision « mio_airport_col » existe mais n'est pas désignée : clique « Utiliser mio_airport_col » (étape 1) ou mets-la dans « Objet racine collision ».\"]"
+  },
+  {
+   "test": "test_named_collision_and_far_origin",
+   "check": "bouton « Utiliser mio_airport_col » : collision désignée",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_named_collision_and_far_origin",
+   "check": "Préparer : collision trouvée par son nom exact",
+   "ok": true,
+   "detail": "1 objet(s) à l'origine du monde exprimé(s) dans le repère du Drawable (sinon Sollumz les exporterait décalés) ; 0 mesh partagé(s) copié(s).\nOrigine de « mio_airport » : (97.500, 200.000, 29.900) — c'est la position de l'entité dans le YMAP.\nCollision « mio_airport_col » trouvée par son nom exact et "
+  },
+  {
+   "test": "test_named_collision_and_far_origin",
+   "check": "après Préparer : plus d'alerte d'origine ni de collision manquante",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
    "test": "test_async_driver_and_cancel",
    "check": "pilote asynchrone terminé sans erreur",
    "ok": true,
@@ -629,7 +659,7 @@
    "test": "test_async_driver_and_cancel",
    "check": "progression rapportée pendant les étapes",
    "ok": true,
-   "detail": "{'Installation', 'Construction', 'Lecture', 'Structure'}"
+   "detail": "{'Structure', 'Installation', 'Lecture', 'Construction', 'Index'}"
   },
   {
    "test": "test_async_driver_and_cancel",

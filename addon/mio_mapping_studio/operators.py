@@ -125,6 +125,35 @@ class MIO_OT_create_collision(bpy.types.Operator):
                      lambda: collision.create_collision_from_mapping(context, s, d, s.collision_replace_existing))
 
 
+class MIO_OT_use_named_collision(bpy.types.Operator):
+    bl_idname = "mio.use_named_collision"
+    bl_label = "Utiliser la collision existante"
+    bl_description = ("Désigne le Bound Composite « mio_xxxx_col » déjà présent comme objet racine collision et le "
+                      "prépare (nom, origine alignée sur le Drawable, validation)")
+    bl_options = {"REGISTER", "UNDO"}
+
+    @classmethod
+    def poll(cls, context):
+        return _poll_sollumz(cls, context) and context.mode == "OBJECT"
+
+    def execute(self, context):
+        s = context.scene.mio_mapping
+
+        def do():
+            named = hierarchy.find_named_collision(s)
+            r = hierarchy.StepResult()
+            if named is None:
+                r.errors.append("Aucun Bound Composite « mio_xxxx_col » trouvé.")
+                return r
+            d = hierarchy.find_drawable(s)
+            if d is None:
+                s.collision_root = named
+                r.warnings.append(f"« {named.name} » désignée. Lance maintenant « Préparer le mapping ».")
+                return r
+            return collision.prepare_collision_root(context, s, [named], d)
+        return _safe(self, context, "prepare", do)
+
+
 class MIO_OT_apply_collision_preset(bpy.types.Operator):
     bl_idname = "mio.apply_collision_preset"
     bl_label = "Appliquer le preset d'usage"
@@ -416,6 +445,7 @@ class MIO_OT_export(bpy.types.Operator):
 
 CLASSES = (
     MIO_OT_refresh, MIO_OT_check_dependencies, MIO_OT_prepare_mapping, MIO_OT_create_collision,
+    MIO_OT_use_named_collision,
     MIO_OT_apply_collision_preset, MIO_OT_find_textures, MIO_OT_rebuild_index, MIO_OT_cancel_job,
     MIO_OT_choose_texture_source, MIO_OT_update_ytyp, MIO_OT_remove_mlo, MIO_OT_configure_mlo,
     MIO_OT_integrate_collision, MIO_OT_export,

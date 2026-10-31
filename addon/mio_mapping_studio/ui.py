@@ -115,6 +115,11 @@ class MIO_PT_step1(MIO_PT_base, bpy.types.Panel):
         layout = self.layout
         layout.prop(s, "origin_mode", text="Origine")
         layout.operator("mio.prepare_mapping", icon="OUTLINER_OB_EMPTY")
+        if s.collision_root is None:
+            from .hierarchy import find_named_collision
+            named = find_named_collision(s)
+            if named is not None:
+                layout.operator("mio.use_named_collision", text=f"Utiliser {named.name}", icon="MOD_PHYSICS")
         box = layout.box()
         box.label(text="Collision depuis le visuel", icon="MOD_PHYSICS")
         box.prop(s, "collision_usage", text="Usage")

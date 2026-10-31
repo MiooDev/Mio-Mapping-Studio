@@ -84,6 +84,24 @@ def find_drawable(settings):
     return None
 
 
+def find_named_collision(settings):
+    """Bound Composite portant exactement le nom attendu « mio_xxxx_col », s'il existe."""
+    name = settings.name_or_error()
+    obj = bpy.data.objects.get(naming.collision_name(name)) if name else None
+    return obj if (obj is not None and sza.is_composite(obj)) else None
+
+
+def origin_far_from_geometry(drawable, margin=5.0):
+    """Distance XY (m) entre l'origine du Drawable et la boîte de sa géométrie, ou 0 si l'origine est dedans."""
+    box = models_world_aabb(mapping_models(drawable))
+    if box is None:
+        return 0.0
+    o = drawable.matrix_world.translation
+    dx = max(box[0][0] - margin - o.x, 0.0, o.x - box[1][0] - margin)
+    dy = max(box[0][1] - margin - o.y, 0.0, o.y - box[1][1] - margin)
+    return float((dx * dx + dy * dy) ** 0.5)
+
+
 def mapping_models(drawable) -> list:
     return [c for c in drawable.children if sza.is_model(c)] if drawable else []
 
@@ -191,8 +209,9 @@ def validate_models(models, res: StepResult):
             unused = [mesh.materials[i].name for i in range(len(mesh.materials))
                       if i not in used and mesh.materials[i] is not None]
             if unused:
-                res.infos.append(f"« {m.name} » LOD {sza.lod_label(level)} : slot(s) inutilisé(s) ignoré(s) pour "
-                                 f"les textures : {', '.join(unused)}.")
+                shown = ", ".join(unused[:4]) + (f"… (+{len(unused) - 4})" if len(unused) > 4 else "")
+                res.infos.append(f"« {m.name} » LOD {sza.lod_label(level)} : {len(unused)} slot(s) de matériau plus utilisés "
+                                 f"par aucune face (normal après découpe), ignorés pour les textures : {shown}.")
 
 
 def prepare_mapping(context, s) -> StepResult:
@@ -330,6 +349,12 @@ def prepare_mapping(context, s) -> StepResult:
     # Collisions désignées ou sélectionnées
     from . import collision
     col_sources = [s.collision_root] if s.collision_root is not None else collision_objs
+    if not col_sources:
+        named = find_named_collision(s)
+        if named is not None:
+            col_sources = [named]
+            res.infos.append(f"Collision « {named.name} » trouvée par son nom exact et utilisée (le champ « Objet racine "
+                             "collision » est maintenant rempli).")
     if col_sources:
         res.extend(collision.prepare_collision_root(context, s, col_sources, target))
     else:

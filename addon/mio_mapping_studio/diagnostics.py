@@ -10,7 +10,8 @@ import bpy
 from . import geom, naming, prefs
 from . import sollumz_adapter as sza
 from .collision import validate_collision_root
-from .hierarchy import StepResult, find_drawable, mapping_models, validate_models
+from .hierarchy import (StepResult, find_drawable, find_named_collision, mapping_models, origin_far_from_geometry,
+                        validate_models)
 
 STEP_KEYS = ("prepare", "textures", "ytyp", "mlo", "collision", "export")
 
@@ -43,8 +44,17 @@ def check_prepare(context, s) -> StepResult:
                           "décalés par Sollumz : relance « Préparer le mapping ».")
     if not res.errors:
         res.infos.append(f"« {d.name} » : {len(models)} modèle(s), origine {tuple(round(v, 3) for v in d.matrix_world.translation)}.")
+    far = origin_far_from_geometry(d)
+    if far > 0:
+        res.warnings.append(f"L'origine de « {d.name} » est à {far:.0f} m de sa géométrie : la distance d'affichage (LOD) "
+                            "est mesurée depuis l'origine, le mapping risque de ne pas apparaître en jeu. Relance "
+                            "« Préparer le mapping » avec l'origine « Centre du mapping (bas) ».")
     col = s.collision_root
-    if col is None:
+    named = find_named_collision(s)
+    if col is None and named is not None:
+        res.warnings.append(f"La collision « {named.name} » existe mais n'est pas désignée : clique « Utiliser "
+                            f"{named.name} » (étape 1) ou mets-la dans « Objet racine collision ».")
+    elif col is None:
         res.warnings.append("Aucune collision : désigne la collision importée ou crée-la depuis le mapping.")
     else:
         vr = validate_collision_root(col)

@@ -633,6 +633,38 @@ def test_invalid_inputs():
     check("aucune sélection : refus (jamais tous les objets de la scène)", step(s, "prepare")[0] == "ERROR")
 
 
+def test_named_collision_and_far_origin():
+    """Cas réel signalé : collision « mio_xxxx_col » présente mais non désignée, Drawable à l'origine loin du mapping."""
+    from mio_mapping_studio import diagnostics
+    import_scene()
+    s = settings("airport", export="export_airport")
+    s.collision_root = None
+    s.mapping_root = None
+    bpy.data.objects["tst_col"].name = "mio_airport_col"
+    gnd = bpy.data.objects["tst_ground"]   # Drawable fait à la main : origine (0,0,0), géométrie vers (100, 200)
+    gnd.name = "mio_airport"
+    bpy.context.view_layer.update()
+    r = diagnostics.check_prepare(bpy.context, s)
+    check("diagnostic : collision existante non désignée signalée (et non « aucune collision »)",
+          any("existe mais n'est pas désignée" in w for w in r.warnings) and
+          not any(w.startswith("Aucune collision") for w in r.warnings), r.warnings)
+    check("diagnostic : origine éloignée de la géométrie signalée", any("de sa géométrie" in w for w in r.warnings),
+          r.warnings)
+    MIO.use_named_collision()
+    check("bouton « Utiliser mio_airport_col » : collision désignée",
+          s.collision_root is not None and s.collision_root.name == "mio_airport_col")
+    s.collision_root = None
+    s.origin_mode = "BOUNDS_BOTTOM_CENTER"
+    select(gnd)
+    MIO.prepare_mapping()
+    check("Préparer : collision trouvée par son nom exact", s.collision_root is not None and
+          s.collision_root.name == "mio_airport_col", step(s, "prepare")[1][:300])
+    r = diagnostics.check_prepare(bpy.context, s)
+    check("après Préparer : plus d'alerte d'origine ni de collision manquante",
+          not any("de sa géométrie" in w or "Aucune collision" in w or "pas désignée" in w for w in r.warnings),
+          r.warnings)
+
+
 def test_async_driver_and_cancel():
     """Pilote asynchrone (chemin de l'interface : progression, thread, processus séparé) et annulation."""
     import mio_mapping_studio.textures.pipeline as tp
@@ -765,7 +797,7 @@ def test_ui_smoke():
 if __name__ == "__main__":
     only = sys.argv[1:]
     tests = [test_static_imported_collision, test_collision_from_visual, test_bvh_split, test_mlo_mode,
-             test_invalid_inputs, test_async_driver_and_cancel, test_ui_smoke]
+             test_invalid_inputs, test_named_collision_and_far_origin, test_async_driver_and_cancel, test_ui_smoke]
     for t in tests:
         if not only or t.__name__ in only:
             run_test(t)
