@@ -665,6 +665,73 @@ def test_named_collision_and_far_origin():
           r.warnings)
 
 
+def _complete_textures(s):
+    """Rend l'étape 2 complète : source choisie pour tst_dirt, DDS local pour tst_missing."""
+    MIO.find_textures()
+    r = ref(s, "tst_dirt")
+    if r is not None and r.status == "AMBIGUOUS":
+        idx = next(i for i, c in enumerate(r.candidates) if c.dict_name == "tst_misc_b_txd")
+        MIO.choose_texture_source(ref_index=list(s.texture_refs).index(r), candidate_index=idx)
+    miss = os.path.join(OUT, "local_dds", "tst_missing.dds")
+    os.makedirs(os.path.dirname(miss), exist_ok=True)
+    shutil.copy(os.path.join(DDS, "tst_concrete.dds"), miss)
+    bpy.data.images["tst_missing"].filepath = miss
+    MIO.find_textures()
+
+
+def test_unused_slots_after_cut():
+    """Cas réel signalé : matériaux sans face après découpe, exportés quand même par Sollumz (faux « textures absentes »)."""
+    import_scene()
+    bld_model = bpy.data.objects["tst_building.model"]
+    hi = bld_model.sz_lods.high.mesh
+    decal = [i for i, m in enumerate(hi.materials) if m and m.shader_properties.filename == "decal.sps"][0]
+    _delete_faces_by_material(hi, decal)
+    check("après découpe : le slot décal existe encore sans aucune face",
+          decal < len(hi.materials) and not any(p.material_index == decal for p in hi.polygons))
+    s = settings("garage_slots", export="export_slots")
+    s.collision_root = bpy.data.objects["tst_col"]
+    select(bpy.data.objects["tst_building"], bpy.data.objects["tst_ground"])
+    MIO.prepare_mapping()
+    _complete_textures(s)
+    check("tst_decal (slot sans face) non demandée à l'étape 2", ref(s, "tst_decal") is None)
+    MIO.update_ytyp()
+    MIO.integrate_collision()
+    MIO.verify_export()
+    st, msg = step(s, "export")
+    check("export COMPLET malgré le shader sans face exporté par Sollumz", "Export COMPLET" in msg, msg[:500])
+    check("le rapport explique le shader sans face", "sans aucune face" in msg, msg[:500])
+    ydr = os.path.join(s.export_dir, "mio_garage_slots.ydr")
+    before = verify(ydr)["info"] if os.path.isfile(ydr) else {"shaders": []}
+    check("avant nettoyage : Sollumz a bien exporté le shader décal mort",
+          "tst_decal" in before.get("referenced_textures", []), before.get("referenced_textures"))
+    d = bpy.data.objects["mio_garage_slots"]
+    m = [c for c in d.children if c.get("mio_source_asset") == "tst_building"][0]
+    faces_before = [m.sz_lods.high.mesh.materials[p.material_index].name for p in m.sz_lods.high.mesh.polygons]
+    n_slots = len(m.sz_lods.high.mesh.materials)
+    MIO.clean_unused_slots()
+    mesh = m.sz_lods.high.mesh
+    faces_after = [mesh.materials[p.material_index].name for p in mesh.polygons]
+    check("nettoyage : slot inutilisé retiré", len(mesh.materials) == n_slots - 1, (n_slots, len(mesh.materials)))
+    check("nettoyage : chaque face garde exactement son matériau", faces_before == faces_after)
+    MIO.find_textures()
+    MIO.update_ytyp()
+    MIO.verify_export()
+    st, msg = step(s, "export")
+    after = verify(ydr)["info"]
+    check("après nettoyage : export COMPLET, plus de shader mort",
+          "Export COMPLET" in msg and "sans aucune face" not in msg and len(after["shaders"]) == len(before["shaders"]) - 1,
+          (msg[:300], len(before["shaders"]), len(after["shaders"])))
+    check("après nettoyage : tst_decal n'est plus référencée", "tst_decal" not in after["referenced_textures"])
+
+
+def _delete_faces_by_material(mesh, index):
+    bm = bmesh.new()
+    bm.from_mesh(mesh)
+    bmesh.ops.delete(bm, geom=[f for f in bm.faces if f.material_index == index], context="FACES")
+    bm.to_mesh(mesh)
+    bm.free()
+
+
 def test_async_driver_and_cancel():
     """Pilote asynchrone (chemin de l'interface : progression, thread, processus séparé) et annulation."""
     import mio_mapping_studio.textures.pipeline as tp
@@ -797,7 +864,8 @@ def test_ui_smoke():
 if __name__ == "__main__":
     only = sys.argv[1:]
     tests = [test_static_imported_collision, test_collision_from_visual, test_bvh_split, test_mlo_mode,
-             test_invalid_inputs, test_named_collision_and_far_origin, test_async_driver_and_cancel, test_ui_smoke]
+             test_invalid_inputs, test_named_collision_and_far_origin, test_unused_slots_after_cut, test_async_driver_and_cancel,
+             test_ui_smoke]
     for t in tests:
         if not only or t.__name__ in only:
             run_test(t)

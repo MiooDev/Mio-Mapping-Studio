@@ -59,3 +59,40 @@ def ensure_local_materials(models, materials) -> list[str]:
         msgs.append(f"Matériau « {mat.name} » partagé avec {len(outside)} objet(s) hors du mapping : copie "
                     f"« {copy.name} » utilisée par le mapping.")
     return msgs
+
+
+def remove_unused_slots(models) -> tuple[int, list[str]]:
+    """Retire, sur chaque mesh de LOD du mapping, les slots de matériau qu'aucune face n'utilise.
+    Les faces gardent leur matériau (indices remappés) ; un mesh partagé hors du mapping est copié d'abord.
+    Retourne (nombre de slots retirés, messages)."""
+    import numpy as np
+    removed, msgs = 0, []
+    mapping_objects = set(models)
+    for model in models:
+        for level, mesh in list(sza.lod_meshes(model).items()):
+            n = len(mesh.materials)
+            if not n:
+                continue
+            idx = np.zeros(len(mesh.polygons), dtype=np.int32)
+            if len(mesh.polygons):
+                mesh.polygons.foreach_get("material_index", idx)
+            used = sorted(set(int(i) for i in np.unique(idx)) & set(range(n))) if len(idx) else []
+            if len(used) == n:
+                continue
+            if any(u not in mapping_objects for u in model_mesh_users(mesh)):
+                mesh = mesh.copy()
+                sza.set_lod_mesh(model, level, mesh)
+                msgs.append(f"Mesh partagé hors du mapping : copie « {mesh.name} » nettoyée à la place.")
+            mats = [mesh.materials[i] for i in used]
+            lut = np.zeros(max(n, int(idx.max()) + 1 if len(idx) else 1), dtype=np.int32)
+            for new_i, old_i in enumerate(used):
+                lut[old_i] = new_i
+            new_idx = lut[idx] if len(idx) else idx
+            mesh.materials.clear()
+            for m in mats:
+                mesh.materials.append(m)
+            if len(new_idx):
+                mesh.polygons.foreach_set("material_index", new_idx)
+            mesh.update()
+            removed += n - len(used)
+    return removed, msgs

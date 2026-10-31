@@ -154,6 +154,36 @@ class MIO_OT_use_named_collision(bpy.types.Operator):
         return _safe(self, context, "prepare", do)
 
 
+class MIO_OT_clean_unused_slots(bpy.types.Operator):
+    bl_idname = "mio.clean_unused_slots"
+    bl_label = "Nettoyer les slots inutilisés"
+    bl_description = ("Retire des meshes du mapping les slots de matériau qu'aucune face n'utilise plus (après découpe). "
+                      "Sollumz exporte sinon ces matériaux dans le YDR comme shaders jamais rendus. Les faces gardent "
+                      "leurs matériaux ; un mesh partagé hors du mapping est copié avant")
+    bl_options = {"REGISTER", "UNDO"}
+
+    @classmethod
+    def poll(cls, context):
+        return _poll_sollumz(cls, context) and context.mode == "OBJECT"
+
+    def execute(self, context):
+        from . import sharing
+        s = context.scene.mio_mapping
+
+        def do():
+            r = hierarchy.StepResult()
+            d = hierarchy.find_drawable(s)
+            if d is None:
+                r.errors.append("Lance d'abord « Préparer le mapping ».")
+                return r
+            n, msgs = sharing.remove_unused_slots(hierarchy.mapping_models(d))
+            r.infos.append(f"{n} slot(s) de matériau inutilisé(s) retiré(s) (aucune face modifiée)." if n
+                           else "Aucun slot inutilisé.")
+            r.infos += msgs
+            return r
+        return _safe(self, context, "prepare", do)
+
+
 class MIO_OT_apply_collision_preset(bpy.types.Operator):
     bl_idname = "mio.apply_collision_preset"
     bl_label = "Appliquer le preset d'usage"
@@ -445,7 +475,7 @@ class MIO_OT_export(bpy.types.Operator):
 
 CLASSES = (
     MIO_OT_refresh, MIO_OT_check_dependencies, MIO_OT_prepare_mapping, MIO_OT_create_collision,
-    MIO_OT_use_named_collision,
+    MIO_OT_use_named_collision, MIO_OT_clean_unused_slots,
     MIO_OT_apply_collision_preset, MIO_OT_find_textures, MIO_OT_rebuild_index, MIO_OT_cancel_job,
     MIO_OT_choose_texture_source, MIO_OT_update_ytyp, MIO_OT_remove_mlo, MIO_OT_configure_mlo,
     MIO_OT_integrate_collision, MIO_OT_export,

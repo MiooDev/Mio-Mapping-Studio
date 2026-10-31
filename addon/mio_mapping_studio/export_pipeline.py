@@ -78,6 +78,28 @@ def _inconsistent_boxes(info, path="") -> list[str]:
     return out
 
 
+def _used_shader_textures(ydr_info):
+    """Textures des shaders réellement utilisés par une géométrie (tous LOD).
+
+    Sollumz 2.9.0 exporte tous les matériaux présents dans les slots des meshes (sollumz_helper.get_sollumz_materials),
+    y compris ceux qui n'ont plus aucune face : ces shaders ne sont jamais rendus et leurs textures ne sont pas
+    nécessaires. Retourne (textures utilisées, textures des seuls shaders morts, nombre de shaders morts)."""
+    used_ids = set()
+    for models in (ydr_info.get("lods") or {}).values():
+        for m in models or []:
+            used_ids.update(m.get("shader_ids", []))
+    used, dead = set(), set()
+    n_dead = 0
+    for i, sh in enumerate(ydr_info.get("shaders", [])):
+        names = {t["texture"] for t in sh.get("textures", []) if t.get("texture")}
+        if i in used_ids:
+            used |= names
+        else:
+            dead |= names
+            n_dead += 1
+    return used, dead - used, n_dead
+
+
 def _count_bound_children(info) -> int:
     return len(info.get("children", [])) if info else 0
 
@@ -233,7 +255,11 @@ def run(context, allow_incomplete: bool = False, dry_run: bool = False) -> StepR
         shutil.copy2(s.ytd_work_path, ytd)
         yinfo = _verify(cmd, [ytd], res).get(ytd.name) or {}
         ytd_textures = {t["name"] for t in yinfo.get("textures", [])}
-    referenced = set(ydr_info.get("referenced_textures", []))
+    referenced, dead_textures, dead_shaders = _used_shader_textures(ydr_info)
+    if dead_shaders:
+        res.infos.append(f"{dead_shaders} shader(s) sans aucune face exporté(s) par Sollumz (slots de matériau inutilisés "
+                         f"après découpe) : leurs {len(dead_textures)} texture(s) ne sont pas nécessaires. « Nettoyer les "
+                         "slots inutilisés » (étape 1) les retire du YDR.")
     embedded = set(ydr_info.get("embedded_textures", []))
     dup = ytd_textures & embedded
     if dup:

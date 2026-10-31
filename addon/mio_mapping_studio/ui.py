@@ -115,6 +115,7 @@ class MIO_PT_step1(MIO_PT_base, bpy.types.Panel):
         layout = self.layout
         layout.prop(s, "origin_mode", text="Origine")
         layout.operator("mio.prepare_mapping", icon="OUTLINER_OB_EMPTY")
+        layout.operator("mio.clean_unused_slots", icon="BRUSH_DATA")
         if s.collision_root is None:
             from .hierarchy import find_named_collision
             named = find_named_collision(s)

@@ -95,7 +95,7 @@
    "test": "test_static_imported_collision",
    "check": "slot inutilisé ignoré (tst_unused)",
    "ok": true,
-   "detail": "{'tst_brick', 'tst_brick_s', 'tst_rock', 'tst_decal', 'tst_grass_n', 'tst_sand', 'tst_sign', 'tst_missing', 'tst_sand_n', 'tst_dirt', 'tst_grass', 'tst_brick_n', 'tst_rock_n', 'tst_concrete'}"
+   "detail": "{'tst_concrete', 'tst_grass', 'tst_sand', 'tst_brick', 'tst_dirt', 'tst_sign', 'tst_brick_s', 'tst_missing', 'tst_rock_n', 'tst_rock', 'tst_sand_n', 'tst_grass_n', 'tst_decal', 'tst_brick_n'}"
   },
   {
    "test": "test_static_imported_collision",
@@ -257,7 +257,7 @@
    "test": "test_static_imported_collision",
    "check": "export COMPLET",
    "ok": true,
-   "detail": "Export COMPLET : mio_garage.ydr, mio_garage.ytd, mio_garage.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export/.mio_staging_mio_garage_20261031_201629\nCollision intégrée relue et alignée avec le visuel (min (-17.5, -20.0, 0.0) max (17.5, 20.0, 6.1)).\nmio_garage.ytyp relu : mio_garage (CBaseArchetype)\nAncien export sauvegardé dans /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/"
+   "detail": "Export COMPLET : mio_garage.ydr, mio_garage.ytd, mio_garage.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export/.mio_staging_mio_garage_20261031_210024\nCollision intégrée relue et alignée avec le visuel (min (-17.5, -20.0, 0.0) max (17.5, 20.0, 6.1)).\nmio_garage.ytyp relu : mio_garage (CBaseArchetype)\nAncien export sauvegardé dans /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/"
   },
   {
    "test": "test_static_imported_collision",
@@ -650,6 +650,60 @@
    "detail": "[]"
   },
   {
+   "test": "test_unused_slots_after_cut",
+   "check": "après découpe : le slot décal existe encore sans aucune face",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_unused_slots_after_cut",
+   "check": "tst_decal (slot sans face) non demandée à l'étape 2",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_unused_slots_after_cut",
+   "check": "export COMPLET malgré le shader sans face exporté par Sollumz",
+   "ok": true,
+   "detail": "Export COMPLET : mio_garage_slots.ydr, mio_garage_slots.ytd, mio_garage_slots.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export_slots\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export_slots/.mio_staging_mio_garage_slots_20261031_210115\nCollision intégrée relue et alignée avec le visuel (min (-17.5, -20.0, 0.0) max (17.5, 20.0, 6.1)).\n1 shader(s) sans aucune face exporté("
+  },
+  {
+   "test": "test_unused_slots_after_cut",
+   "check": "le rapport explique le shader sans face",
+   "ok": true,
+   "detail": "Export COMPLET : mio_garage_slots.ydr, mio_garage_slots.ytd, mio_garage_slots.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export_slots\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export_slots/.mio_staging_mio_garage_slots_20261031_210115\nCollision intégrée relue et alignée avec le visuel (min (-17.5, -20.0, 0.0) max (17.5, 20.0, 6.1)).\n1 shader(s) sans aucune face exporté("
+  },
+  {
+   "test": "test_unused_slots_after_cut",
+   "check": "avant nettoyage : Sollumz a bien exporté le shader décal mort",
+   "ok": true,
+   "detail": "['tst_brick', 'tst_brick_n', 'tst_brick_s', 'tst_concrete', 'tst_decal', 'tst_dirt', 'tst_grass', 'tst_grass_n', 'tst_missing', 'tst_rock', 'tst_rock_n', 'tst_sand', 'tst_sand_n', 'tst_sign']"
+  },
+  {
+   "test": "test_unused_slots_after_cut",
+   "check": "nettoyage : slot inutilisé retiré",
+   "ok": true,
+   "detail": "(4, 3)"
+  },
+  {
+   "test": "test_unused_slots_after_cut",
+   "check": "nettoyage : chaque face garde exactement son matériau",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "test_unused_slots_after_cut",
+   "check": "après nettoyage : export COMPLET, plus de shader mort",
+   "ok": true,
+   "detail": "('Export COMPLET : mio_garage_slots.ydr, mio_garage_slots.ytd, mio_garage_slots.ytyp -> /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out_52/export_slots\\nDossier temporaire : /tmp/claude-0/-home-user-Site-Client/ef1f0674-a031-54b8-9ad6-2b3b3d352a41/scratchpad/out', 5, 4)"
+  },
+  {
+   "test": "test_unused_slots_after_cut",
+   "check": "après nettoyage : tst_decal n'est plus référencée",
+   "ok": true,
+   "detail": ""
+  },
+  {
    "test": "test_async_driver_and_cancel",
    "check": "pilote asynchrone terminé sans erreur",
    "ok": true,
@@ -659,7 +713,7 @@
    "test": "test_async_driver_and_cancel",
    "check": "progression rapportée pendant les étapes",
    "ok": true,
-   "detail": "{'Structure', 'Installation', 'Lecture', 'Construction', 'Index'}"
+   "detail": "{'Lecture', 'Installation', 'Structure', 'Construction'}"
   },
   {
    "test": "test_async_driver_and_cancel",

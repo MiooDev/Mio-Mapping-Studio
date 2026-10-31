@@ -30,9 +30,10 @@ Commande : `tests/run_tests.sh` (voir l'en-tête du script). Rapports bruts :
 | Mode MLO limbo (5 fichiers) + refus du montage MLO/statique invalide | 16 | ✅ 16/16 | ✅ 16/16 |
 | Entrées invalides | 3 | ✅ 3/3 | ✅ 3/3 |
 | Collision `mio_xxxx_col` existante non désignée + origine (0,0,0) loin du mapping (cas réel signalé) | 5 | ✅ 5/5 | non relancé |
+| Slots de matériau sans face après découpe, exportés par Sollumz + nettoyage (cas réel signalé) | 9 | ✅ 9/9 | non relancé |
 | Pilote asynchrone (tâche de fond), progression, annulation | 7 | ✅ 7/7 | ✅ 7/7 |
 | Interface : chaque panneau exécuté avec un layout simulé (icônes, propriétés, opérateurs) | 2 | ✅ 2/2 | ✅ 2/2 |
-| **Total** | **117** | **117/117** | **112/112** (avant l'ajout du test ci-dessus) |
+| **Total** | **126** | **126/126** | **112/112** (avant l'ajout des deux tests ci-dessus) |
 
 ### Ce que couvrent ces vérifications
 - **Collisions importées** : YBN importé par Sollumz (BVH à matrice identité), désigné comme racine, renommé
@@ -64,6 +65,12 @@ Commande : `tests/run_tests.sh` (voir l'en-tête du script). Rapports bruts :
 [`tests/repro_sollumz_identity_offset.py`](../tests/repro_sollumz_identity_offset.py) : avec Sollumz 2.9.0, un enfant
 à matrice monde identité sous un Drawable à (100, 200, 30) est exporté à `(99,199,30)..(101,201,32)` au lieu de
 `(-1,-1,0)..(1,1,2)`. Les tests montrent que l'addon produit des fichiers alignés dans ce cas.
+
+### Comportement Sollumz pris en compte : matériaux sans face
+Sollumz 2.9.0 exporte dans le YDR tous les matériaux présents dans les slots des meshes
+(`sollumz_helper.get_sollumz_materials`), même ceux qui n'ont plus aucune face après une découpe. Ces shaders ne
+sont jamais rendus : la vérification de l'export ne compte que les textures des shaders utilisés par une géométrie,
+et le bouton « Nettoyer les slots inutilisés » les retire (test : chaque face garde exactement son matériau).
 
 ### Messages observés, sans effet
 - Sollumz affiche un avertissement numpy (division par un volume nul) pour un plan de collision ouvert : pour un

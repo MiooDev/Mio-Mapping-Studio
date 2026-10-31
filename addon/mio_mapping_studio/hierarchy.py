@@ -211,7 +211,8 @@ def validate_models(models, res: StepResult):
             if unused:
                 shown = ", ".join(unused[:4]) + (f"… (+{len(unused) - 4})" if len(unused) > 4 else "")
                 res.infos.append(f"« {m.name} » LOD {sza.lod_label(level)} : {len(unused)} slot(s) de matériau plus utilisés "
-                                 f"par aucune face (normal après découpe), ignorés pour les textures : {shown}.")
+                                 f"par aucune face (normal après découpe), ignorés pour les textures : {shown}. « Nettoyer les slots "
+                                 "inutilisés » les retire du YDR.")
 
 
 def prepare_mapping(context, s) -> StepResult:
